@@ -1,6 +1,7 @@
-package main.java.shiro.util;
+package shiro.util;
 
-import main.java.shiro.subject.Subject;
+import shiro.mgt.SecurityManager;
+import shiro.subject.Subject;
 
 import java.util.HashMap;
 import java.util.Map;

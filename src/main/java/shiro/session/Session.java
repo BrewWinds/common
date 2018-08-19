@@ -1,4 +1,4 @@
-package main.java.shiro.session;
+package shiro.session;
 
 import java.io.Serializable;
 import java.util.Collection;

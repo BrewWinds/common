@@ -1,4 +1,4 @@
-package main.java.shiro.authlz.permission;
+package shiro.authz.permission;
 
 import java.io.Serializable;
 import java.util.Set;

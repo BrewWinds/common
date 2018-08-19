@@ -1,4 +1,4 @@
-package main.java.shiro.cache;
+package shiro.cache;
 
 import java.util.Collection;
 import java.util.Set;

@@ -1,7 +1,7 @@
-package main.java.shiro.authlz.permission;
+package shiro.authz.permission;
 
-import main.java.shiro.authlz.AuthorizationException;
-import main.java.shiro.subject.PrincipalCollection;
+import shiro.authz.AuthorizationException;
+import shiro.subject.PrincipalCollection;
 
 import java.util.Collection;
 import java.util.List;

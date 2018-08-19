@@ -1,6 +1,7 @@
-package main.java.shiro.session.mgt.eis;
+package shiro.session.mgt.eis;
 
-import main.java.shiro.session.Session;
+
+import shiro.session.Session;
 
 import java.io.Serializable;
 import java.util.Collection;

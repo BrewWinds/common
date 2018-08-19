@@ -1,6 +1,7 @@
-package main.java.shiro.cache;
+package shiro.cache;
 
-import main.java.shiro.ShiroException;
 
-public class CacheException extends ShiroException{
+import shiro.ShiroException;
+
+public class CacheException extends ShiroException {
 }

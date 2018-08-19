@@ -1,4 +1,4 @@
-package main.java.shiro;
+package shiro;
 
 public class ShiroException extends RuntimeException{
 

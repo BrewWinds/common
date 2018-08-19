@@ -1,4 +1,4 @@
-package main.java.shiro.authlz.permission;
+package shiro.authz.permission;
 
 public interface Permission {
 

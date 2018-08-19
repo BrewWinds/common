@@ -1,8 +1,8 @@
-package main.java.shiro.session.mgt;
+package shiro.session.mgt;
 
 
-import main.java.shiro.session.Session;
-import main.java.shiro.session.SessionException;
+import shiro.session.Session;
+import shiro.session.SessionException;
 
 public interface SessionManager {
 

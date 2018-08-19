@@ -1,6 +1,6 @@
-package main.java.shiro.session;
+package shiro.session;
 
-import main.java.shiro.ShiroException;
+import shiro.ShiroException;
 
 public class SessionException extends ShiroException{
 }

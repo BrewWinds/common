@@ -1,9 +1,10 @@
-package main.java.shiro.authlz.permission;
+package shiro.authz.permission;
+
 
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface AuthorizationInfo extends Serializable{
+public interface AuthorizationInfo extends Serializable {
 
     Collection<String> getRoles();
 

@@ -1,4 +1,4 @@
-package main.java.shiro.authc;
+package shiro.authc;
 
 import java.io.Serializable;
 

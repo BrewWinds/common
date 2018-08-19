@@ -1,4 +1,4 @@
-package main.java.shiro.session.mgt;
+package shiro.session.mgt;
 
 import java.io.Serializable;
 import java.util.Map;

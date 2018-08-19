@@ -1,6 +1,6 @@
-package main.java.shiro.session.mgt;
+package shiro.session.mgt;
 
-import main.java.shiro.session.Session;
+import shiro.session.Session;
 
 public interface SessionFactory {
 
