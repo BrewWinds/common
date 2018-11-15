@@ -9,12 +9,16 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+
+        <!-- google guava-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.0-jre</version>
         </dependency>
 
+
+        <!-- apache common -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -27,6 +31,14 @@
             <version>4.2</version>
         </dependency>
 
+
+        <!-- Spring -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.1.2.RELEASE</version>
+        </dependency>
 
     </dependencies>
 </project>
