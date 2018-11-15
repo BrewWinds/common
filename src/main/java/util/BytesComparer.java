@@ -7,8 +7,8 @@ package util;
  */
 public class BytesComparer{
 
-    public static int compareTo(byte[] buffer1, byte[] buffer2){
-        return compareTo(buffer1, 0, buffer1.length, buffer2, 0, buffer2.length);
+    public static int compareTo(byte[] left, byte[] right){
+        return compareTo(left, 0, left.length, right, 0, right.length);
     }
 
     public static int compareTo(byte[] buffer1, int offset1, int length1,
