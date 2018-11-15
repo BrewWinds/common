@@ -107,7 +107,7 @@ public class Cache<T> {
         }
 
         if(expireTimeInMillis == ETERNAL || expireTimeInMillis > now.getTime()){
-            this.set(getEffectiveKey(key), value, expireTimeInMillis);
+            cache.put(getEffectiveKey(key), new CacheValue<>(value, expireTimeInMillis));
         }
 
     }
