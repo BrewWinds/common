@@ -1,9 +1,8 @@
 package reflect;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.lang.reflect.*;
 
 /**
  * @Auther:
@@ -12,9 +11,6 @@ import java.lang.reflect.Type;
  */
 public class GenericUtils {
 
-    /**
-     * 获取子类确切的参数
-     */
     public static Class getActualType(Class<?> clazz, int argIndex){
 
         Type gType = clazz.getGenericSuperclass();
@@ -39,6 +35,47 @@ public class GenericUtils {
         }else{
             return Object.class;
         }
+    }
+
+
+    public static Class<?> getType(Method method, int argIdx){
+        return getClassType(method, argIdx, 0);
+    }
+
+    /**
+     * public R handle(T, A)
+     *
+     * public Apple handle(Map<String, Integer> map, Apple a)
+     * @param method
+     * @param argIdx
+     * @param genIdx
+     * @return
+     */
+    public static Class<?> getClassType(Method method, int argIdx, int genIdx){
+        Type type = method.getGenericParameterTypes()[argIdx];
+        return getActualClassType(((ParameterizedType)type).getActualTypeArguments()[genIdx]);
+    }
+
+
+    public static Class<?> getActualClassType(Type type){
+
+        if(type instanceof Class<?>){
+            return (Class<?>) type;
+
+        }else if(type instanceof WildcardType){
+
+            WildcardType wildCard = (WildcardType) type;
+
+            if( wildCard.getUpperBounds()[0] instanceof Object){
+                return (Class<?>) wildCard.getUpperBounds()[0];
+            }else if(wildCard.getLowerBounds()==null || wildCard.getLowerBounds().length==0){
+                return (Class<?>) ((WildcardType) type).getLowerBounds()[0];
+            }else{
+                return Object.class;
+            }
+        }
+
+        return Object.class;
     }
 
 }
