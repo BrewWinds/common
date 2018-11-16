@@ -3,7 +3,6 @@ package jdbc;
 import java.lang.annotation.*;
 
 /**
- * @Auther: 01378178
  * @Date: 2018/11/15 15:05
  * @Description:
  */

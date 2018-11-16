@@ -4,7 +4,6 @@ import validate.Constraint;
 import validate.FieldValidator;
 
 /**
- * @Auther: 01378178
  * @Date: 2018/11/14 11:40
  * @Description:
  */
