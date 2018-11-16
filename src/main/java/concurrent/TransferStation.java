@@ -17,7 +17,7 @@ import java.util.function.BiFunction;
 public final class TransferStation<T> {
 
     private volatile boolean isEnd = false;
-    private BlockingQueue<T> queue = new LinkedBlockingDeque();
+    private BlockingQueue<T> queue = new LinkedBlockingQueue();
     private final AsynTask task;
 
     public TransferStation(BiFunction<List<T>, Boolean, Runnable> processor){

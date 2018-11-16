@@ -25,13 +25,17 @@ public @interface Constraint {
 
     int minLen() default -1;
 
+    double decimalMax() default Double.POSITIVE_INFINITY;
+
+    double decimalMin() default Double.NEGATIVE_INFINITY;
+
     String pattern() default "";
 
     String msg() default "";
 
     Tense tense() default Tense.ANY;
 
-    int[] series() default {};
+    long[] series() default {};
 
     enum Tense{
         PAST, FUTURE, ANY;

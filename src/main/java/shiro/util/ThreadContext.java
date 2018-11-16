@@ -16,7 +16,7 @@ public class ThreadContext {
 
 
     public static Map<Object, Object> getResouce(){
-        return resources == null ? null : new HashMap<>(resources.get());
+        return resources == null ? null : new HashMap(resources.get());
     }
 
     public void setResource(Map<Object, Object> newResources){
