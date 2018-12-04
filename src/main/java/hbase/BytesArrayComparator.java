@@ -1,10 +1,10 @@
-package util;
+package hbase;
 
 /**
  * @Date: 2018/11/15 10:53
  * @Description:
  */
-public class BytesComparer{
+public class BytesArrayComparator {
 
     public static int compareTo(byte[] left, byte[] right){
         return compareTo(left, 0, left.length, right, 0, right.length);
