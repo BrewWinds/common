@@ -1,7 +1,5 @@
 package asyn;
 
-import org.omg.SendingContext.RunTime;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -15,14 +13,14 @@ import java.util.function.BiFunction;
  */
 public class Transmitter<T> {
 
-    public Queue<T> queue = new ConcurrentLinkedQueue();
+    private final Queue<T> queue = new ConcurrentLinkedQueue();
     private volatile boolean end = false;
     private final AsynThread asynThread;
 
     public Transmitter(int batchSize, long sleepTimeMillis,
                        long period, ExecutorService executor, BiFunction bifun){
         this.asynThread = new AsynThread(batchSize, sleepTimeMillis,
-                period, null, bifun);
+                period, executor, bifun);
     }
 
     public boolean put(T t){
@@ -57,7 +55,7 @@ public class Transmitter<T> {
             this.batchSize = batchSize;
             this.sleepTimeMillis = sleepTimeMillis;
             this.period = period;
-            bifun = bifun;
+            this.bifun = bifun;
             if(executor == null){
                 destroy = true;
                 this.executor = new ThreadPoolExecutor(1, Runtime.getRuntime().availableProcessors(),
@@ -108,8 +106,8 @@ public class Transmitter<T> {
                     }else{
                         try {
                             TimeUnit.MILLISECONDS.sleep(sleepTimeMillis);
-                        } catch (InterruptedException ignore) {
-                            // ignore ,
+                        } catch (InterruptedException e) {
+                            break;
                         }
                     }
                 }
