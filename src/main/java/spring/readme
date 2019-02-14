@@ -31,7 +31,7 @@ spring 脚手架
 			<ref bean="stringHttpMessageConverter" />
 		</mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean class="com.sf.sids.page.PageMethodArgumentResolver" />
+            <bean class="com.sids.page.PageMethodArgumentResolver" />
         </mvc:argument-resolvers>
 </mvc:annotation-driven>
 
