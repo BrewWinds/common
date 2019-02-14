@@ -1,0 +1,92 @@
+spring 脚手架
+
+# 1. mvc 入参, 出参处理
+
+<mvc:annotation-driven />的可选配置
+    参考：https://starscream.iteye.com/blog/1098880
+         https://www.cnblogs.com/shanheyongmu/p/5552427.html
+
+<mvc:annotation-driven  message-codes-resolver ="" validator="" conversion-service="">
+    <mvc:return-value-handlers>
+        <bean></bean>
+    </mvc:return-value-handlers>
+
+    <mvc:argument-resolvers>
+    </mvc:argument-resolvers>
+
+    <mvc:message-converters>
+    </mvc:message-converters>
+</mvc:annotation-driven>
+
+
+
+<!-- example -->
+<mvc:annotation-driven validator="validator"
+		conversion-service="conversionService">
+		<mvc:message-converters register-defaults="true">
+			<!-- 对声明@ResponseBody -->
+			<ref bean="fastJsonHttpMessageConverter" />
+
+			<!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+			<ref bean="stringHttpMessageConverter" />
+		</mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="com.sf.sids.page.PageMethodArgumentResolver" />
+        </mvc:argument-resolvers>
+</mvc:annotation-driven>
+
+<bean id="fastJsonHttpMessageConverter"
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+		<property name="features">
+			<!-- com.alibaba.fastjson.serializer.SerializerFeature -->
+			<array>
+				<value>QuoteFieldNames</value>
+				<value>WriteDateUseDateFormat</value>
+				<value>WriteMapNullValue</value>
+				<value>WriteNullStringAsEmpty</value>
+				<value>WriteNullListAsEmpty</value>
+				<value>WriteNullNumberAsZero</value>
+				<value>WriteNonStringKeyAsString</value>
+				<value>SkipTransientField</value>
+				<!-- <value>BrowserCompatible</value>
+				<value>PrettyFormat</value> -->
+			</array>
+		</property>
+</bean>
+
+
+<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8" />
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+				<value>text/html;charset=UTF-8</value>
+
+				<value>text/json;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+</bean>
+
+<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="converters">
+        <set>
+            <bean class="StringToDateConverter">
+            </bean>
+        </set>
+    </property>
+</bean>
+
+<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<!-- 如果不加mesageSource的配置 默认使用classpath下的 ValidationMessages.properties -->
+		<property name="validationMessageSource" ref="messageSource" />
+</bean>
