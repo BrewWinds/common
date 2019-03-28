@@ -1,4 +1,4 @@
-package nio.reactor;
+package nio.reactor.singlethread;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

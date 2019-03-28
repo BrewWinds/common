@@ -1,4 +1,4 @@
-package nio.reactor;
+package nio.reactor.singlethread;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -7,9 +7,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 /**
- * @Auther: 01378178
- * @Date: 2019/3/28 14:13
- * @Description:
  */
 public final class Handler implements Runnable{
 
