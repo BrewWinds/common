@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" 
+  xmlns:task="http://www.springframework.org/schema/task"
+  xmlns:tx="http://www.springframework.org/schema/tx" 
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+  ">
+
+
+    <!-- 设置使用注解的类所在的包 -->
+    <context:component-scan base-package="com.xxxx" >
+      <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+      <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+      <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <import resource="classpath:spring/spring-datasource.xml" />
+	<!-- open开头的配置文件属于框架默认的配置，可以移除自己添加 -->
+	<import resource="classpath:conf/open-disconf.xml" />
+	<!-- open-ehcache.xml, open-redis.xml，可以移除自己添加 -->
+	<!--<import resource="classpath:conf/open-ehcache.xml" />-->
+	<import resource="classpath:spring-data-hbase.xml" />
+	<import resource="classpath:spring/spring-redis.xml"/>
+
+	<!-- <import resource="classpath:spring-quartz-job.xml"/> -->
+	<import resource="classpath:spring-spy-job.xml"/>
+	
+	
+	
+	<bean id="sysconfig_disconf"
+		class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:sys.properties</value>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
+				<value>classpath:hbase.properties</value>
+				<value>classpath:kafka.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<aop:aspectj-autoproxy />
+    <!-- audit log Aspect -->
+
+	<bean id="logAspect" class="com.xxx.LoggingAspect" />
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="com.sss.setSystemCode" />
+		<property name="arguments" value="${sysCode}"></property>
+    </bean>
+
+
+    <!-- 
+      http://www.springframework.org/schema/task/spring-task.xsd
+
+      pool-size:
+        The size of the executor's thread pool as either a single value or a range (e.g. 5-10). 
+        If no bounded queue-capacity value is provided, then a max value has no effect unless 
+        the range is specified as 0-n. In that case, the core pool will have a size of n, but 
+        the 'allowCoreThreadTimeout' flag will be set to true. If a queue-capacity is provided, 
+        then the lower bound of a range will map to the core size and the upper bound will map 
+        to the max size. If this attribute is not provided, the default core size will be 1, 
+        and the default max size will be Integer.MAX_VALUE (i.e. unbounded).
+
+      queue-capacity:
+          Queue capacity for the ThreadPoolTaskExecutor. If not specified, the default will be 
+          Integer.MAX_VALUE (i.e. unbounded).
+     -->
+    <task:executor id="taskExecutor" pool-size="4-64"
+                   queue-capacity="0" keep-alive="120" 
+                   rejection-policy="CALLER_RUNS" />
+    <task:scheduler id="taskScheduler" pool-size="5" />
+    <task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
+
+</beans>
