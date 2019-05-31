@@ -11,6 +11,9 @@ import java.util.Set;
 
 /**
  * http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf
+ *
+ * 一个线程轮询处理事件, 并作分发动作 [分发的内容可以交给其他线程来处理]
+ *
  * @Description:
  */
 public class Reactor implements Runnable{
@@ -47,6 +50,9 @@ public class Reactor implements Runnable{
         }
     }
 
+    /**
+     * @param key
+     */
     public void dispatch(SelectionKey key){
         Runnable r = (Runnable) key.attachment();
         if(r!=null){

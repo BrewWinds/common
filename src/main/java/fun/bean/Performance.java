@@ -8,12 +8,12 @@ import java.util.stream.Stream;
  */
 public interface Performance {
 
-    public String getName();
+    String getName();
 
-    public Stream<Artist> getMusicians();
+    Stream<Artist> getMusicians();
 
     // TODO: test
-    public default Stream<Artist> getAllMusicians() {
+    default Stream<Artist> getAllMusicians() {
         return getMusicians().flatMap(artist -> {
             return Stream.concat(Stream.of(artist), artist.getMembers());
         });

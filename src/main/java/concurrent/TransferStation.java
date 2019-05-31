@@ -89,7 +89,6 @@ public final class TransferStation<T> {
                             executor.shutdown();
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ;
                         }
                     }
                     break;
