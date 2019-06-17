@@ -9,8 +9,6 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
- * @Auther: 01378178
- * @Date: 2019/6/17 13:49
  * @Description:
  */
 public class Networks {
