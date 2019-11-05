@@ -56,6 +56,7 @@ public class PoolHandler implements Runnable{
         sk.interestOps(SelectionKey.OP_WRITE);
     }
 
+    // it should not be like this, mostly like a loop event till status complete.
     public void run(){
         try{
             if(state==READING) read();

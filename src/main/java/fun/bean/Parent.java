@@ -1,7 +1,6 @@
 package fun.bean;
 
 /**
- * @Auther: 01378178
  * @Date: 2018/11/22 16:05
  * @Description:
  */

@@ -10,7 +10,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Function;
 
 /**
- * @Auther: 01378178
  * @Date: 2019/8/19 11:14
  * @Description:
  */

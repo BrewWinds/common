@@ -1,6 +1,5 @@
-package query;
+package hbase.page;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import org.springframework.util.CollectionUtils;
@@ -9,11 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auther: 01378178
  * @Date: 2018/11/30 15:25
  * @Description:
  */
-public class HbasePageQueryBuilder {
+public class PageQueryBuilder {
     private final int pageSize;
     private final PageSort pageSort;
 
@@ -32,19 +30,19 @@ public class HbasePageQueryBuilder {
     private boolean rowKeyOnly = false;
 
 
-    private HbasePageQueryBuilder(int pageSize, PageSort pageSort){
+    private PageQueryBuilder(int pageSize, PageSort pageSort){
         Preconditions.checkArgument(pageSize > 0, "pageSize must greater than 0");
         Preconditions.checkArgument(pageSort!=null, "page sort must not be null.");
         this.pageSize = pageSize;
         this.pageSort = pageSort;
     }
 
-    public static HbasePageQueryBuilder newBuilder(int pageSize){
-        return new HbasePageQueryBuilder(pageSize, PageSort.ASC);
+    public static PageQueryBuilder newBuilder(int pageSize){
+        return new PageQueryBuilder(pageSize, PageSort.ASC);
     }
 
-    public static HbasePageQueryBuilder newBuilder(int pageSize, PageSort pageSort){
-        return new HbasePageQueryBuilder(pageSize, pageSort);
+    public static PageQueryBuilder newBuilder(int pageSize, PageSort pageSort){
+        return new PageQueryBuilder(pageSize, pageSort);
     }
 
 
@@ -161,8 +159,8 @@ public class HbasePageQueryBuilder {
         return results.get(isNextPage ? results.size() - 1 : 0);
     }
 
-    static enum PageSort{
-        ASC, DESC;
+    public static enum PageSort{
+        ASC, DESC
     }
 
     public <T> T orElse(T obj, T defaultValue, Predicate<T> predicate){
@@ -171,5 +169,9 @@ public class HbasePageQueryBuilder {
 
     static boolean notNull(Object obj){
         return obj != null;
+    }
+
+    public int getActualPageSize(){
+        return isInclusiveStartRow() ? pageSize : pageSize + 1;
     }
 }

@@ -3,8 +3,7 @@ package hbase;
 import java.io.Serializable;
 import java.util.HashMap;
 
-/**
- * @Auther: 01378178
+/**d
  * @Date: 2018/12/4 11:02
  * @Description:
  */

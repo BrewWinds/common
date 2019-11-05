@@ -2,6 +2,7 @@ package concurrent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StopWatch;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -23,6 +24,7 @@ public class ConcurrentExecutor {
             return;
         }
 
+        StopWatch watch = new StopWatch();
         Executor executor = Executors.newFixedThreadPool(times);
 
         IntStream.range(0, times).mapToObj(
@@ -33,7 +35,7 @@ public class ConcurrentExecutor {
                 CompletableFuture::join
         );
 
-        logger.info("");
+        logger.info("asynTask run {} threads. {}", times, watch);
     }
 
 

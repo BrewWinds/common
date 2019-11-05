@@ -7,7 +7,6 @@ import java.util.concurrent.*;
 import java.util.function.BiFunction;
 
 /**
- * @Auther: 01378178
  * @Date: 2019/1/21 10:06
  * @Description:
  */

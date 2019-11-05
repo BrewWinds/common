@@ -6,7 +6,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Auther: 01378178
  * @Date: 2019/7/2 18:01
  * @Description:
  */

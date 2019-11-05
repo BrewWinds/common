@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * @Auther: 01378178
  * @Date: 2019/6/12 15:50
  * @Description:
  */

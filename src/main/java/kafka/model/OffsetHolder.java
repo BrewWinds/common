@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- * @Auther: 01378178
  * @Date: 2019/2/20 16:40
  * @Description:
  * This is the data buffer which play an
