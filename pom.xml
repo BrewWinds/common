@@ -113,7 +113,7 @@
         </dependency>
 
         <!-- mybatis 分页插件 -->
-         <dependency>
+        <dependency>
           <groupId>com.github.pagehelper</groupId>
           <artifactId>pagehelper</artifactId>
           <version>5.1.8</version>
@@ -151,7 +151,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.34</version>
         </dependency>
-
 
 
         <!--hadoop relevant-->
@@ -394,6 +393,67 @@
     </dependency>
 
 
+     <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>transport</artifactId>
+        <version>7.2.1</version>
+    </dependency>
+
+        <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-client</artifactId>
+        <version>7.2.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-high-level-client</artifactId>
+        <version>7.2.1</version>
+    </dependency>
+
+
+
+         <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.18</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+
+        <!-- mahout -->
+   <!-- <dependency>
+        <groupId>org.apache.mahout</groupId>
+        <artifactId>mahout-core</artifactId>
+        <version>0.9</version>
+    </dependency>-->
+
+    <dependency>
+        <groupId>org.apache.mahout</groupId>
+        <artifactId>mahout-math</artifactId>
+        <version>0.13.0</version>
+    </dependency>
+
+    <!-- 字符检测 -->
+    <dependency>
+        <groupId>jchardet</groupId>
+        <artifactId>jchardet</artifactId>
+        <version>1.1.0</version>
+    </dependency>
+
     </dependencies>
 
     <build>
@@ -406,7 +466,42 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
+
+            <!-- https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-low-usage-shading.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.http</pattern>
+                                    <shadedPattern>hidden.org.apache.http</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.logging</pattern>
+                                    <shadedPattern>hidden.org.apache.logging</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons.codec</pattern>
+                                    <shadedPattern>hidden.org.apache.commons.codec</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons.logging</pattern>
+                                    <shadedPattern>hidden.org.apache.commons.logging</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>

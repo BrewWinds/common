@@ -24,6 +24,6 @@ public @interface JdbcField {
 
     // To Complete
     enum DataType{
-        INT, VARCHAR, DATETIME;
+        INT, VARCHAR, DATETIME
     }
 }

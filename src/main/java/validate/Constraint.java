@@ -38,7 +38,7 @@ public @interface Constraint {
     long[] series() default {};
 
     enum Tense{
-        PAST, FUTURE, ANY;
+        PAST, FUTURE, ANY
     }
 
 }

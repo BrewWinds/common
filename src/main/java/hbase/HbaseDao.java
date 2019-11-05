@@ -1,10 +1,14 @@
+/*
 package hbase;
 
+*/
 /**
  * @Date: 2018/12/3 10:36
  * @Description:
- */
+ *//*
 
+
+import com.google.common.collect.ImmutableBiMap;
 import hbase.page.PageQueryBuilder;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -17,13 +21,17 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.*;
+import org.apache.hadoop.io.serializer.Serialization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
+import org.springframework.data.hadoop.hbase.RowMapper;
 import util.Bytes;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +43,16 @@ public abstract class HbaseDao<T, R extends Serializable & Comparable<R>> {
 
     protected HbaseTemplate template;
 
+    protected final Class<T> classType;
+    protected final Class<R> rowKeyType;
+    protected final ImmutableBiMap<String, Field> fieldMap;
+    protected final String tableName;
+    protected final String globalFamily;
     protected final List<byte[]> definedFamilies;
+    protected final Class<T> classType;
 
+    @Resource
+    protected HbaseTemplate template
 
     public final Configuration getConfig() {
         return template.getConfiguration();
@@ -53,7 +69,7 @@ public abstract class HbaseDao<T, R extends Serializable & Comparable<R>> {
     private List<T> find(Object startRow, Object endRow, int pageSize, boolean reversed,
                          ScanHook scanHook, boolean inclusiveStartRow) {
 
-        Scan scan = buildScan(startRow, startRow, pageSize, reversed, scanHook);
+        Scan scan = buildScan(startRow, endRow, pageSize, reversed, scanHook);
         List<T> result = template.find(template, scan, )
 
         return null;
@@ -65,6 +81,34 @@ public abstract class HbaseDao<T, R extends Serializable & Comparable<R>> {
 
     public List<T> previousPage(PageQueryBuilder query) {
         return page(query, false, query.getPageSort() == PageQueryBuilder.PageSort.ASC);
+    }
+
+    private void setRowKey(HbaseEntity<R> entity, byte[] rowKey){
+        entity.setRowkey;
+    }
+
+    private <V> void setRowKey(HbaseMap<V, R> map, byte[] rowKey){
+
+    }
+
+    private R convertRowKey(byte[] rowKey){
+        R key;
+        if(rowKey == null){
+            key = null;
+        }else if(this.rowKeyType.equals(byte[].class)){
+            key = (R)((Object)rowKey);
+        }else if(this.rowKeyType.equals(String.class)){
+            key = (R) org.apache.hadoop.hbase.util.Bytes.toString(rowKey);
+        }else if(this.rowKeyType.equals(ByteArrayWrapper.class)){
+            key = (R) new ByteArrayWrapper(rowKey);
+        }else{
+            try{
+                key = this.rowKeyType.getConstructor(byte[].class).newInstance(rowKey);
+            }catch(Exception e){
+
+            }
+        }
+        return key;
     }
 
     private List<T> page(PageQueryBuilder query, boolean isNextPage, boolean reversed) {
@@ -131,6 +175,22 @@ public abstract class HbaseDao<T, R extends Serializable & Comparable<R>> {
         }
         scan.setFilter(filter);
         return scan;
+    }
+
+    private RowMapper<T> rowMapper(){
+        return (rs, rowNum) -> {
+            if(rs.isEmpty()){
+                return null;
+            }
+            Object model = classType.newInstance();
+            if(HbaseEntity.class.isAssignableFrom(classType)){
+                HbaseEntity<R> entity = (HbaseEntity<R>) model;
+            }else if(HbaseMap.class.isAssignableFrom(classType)){
+
+            }else{
+                throw new UnsupportedOperationException("Unsupported type: "classType.getCanonicalName());
+            }
+        };
     }
 
 
@@ -200,3 +260,4 @@ public abstract class HbaseDao<T, R extends Serializable & Comparable<R>> {
 }
 
 
+*/

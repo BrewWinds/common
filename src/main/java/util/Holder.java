@@ -12,7 +12,12 @@ public class Holder<T> {
         this.val = val;
     }
 
-    public T getVal() {
+    public T get() {
+        return val;
+    }
+
+    public T set(T val){
+        this.val = val;
         return val;
     }
 
