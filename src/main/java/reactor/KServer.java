@@ -2,7 +2,6 @@ package reactor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scheduler.CustScheduler;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,7 +24,7 @@ public class KServer {
 
     BrokerState brokerState = new BrokerState();
 
-    CustScheduler custScheduler;
+//    CustScheduler custScheduler;
     SocketServer socketServer;
 
     public void startup(){

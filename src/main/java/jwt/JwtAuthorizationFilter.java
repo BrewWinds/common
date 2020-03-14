@@ -5,7 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
-import web.WebUtils;
+import web.WebUtils2;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -43,7 +43,7 @@ public class JwtAuthorizationFilter extends AuthorizationFilter {
         Jws<Claims> jws;
 
         try {
-            jws = jwtManager.verify(WebUtils.getCookie(req, WebUtils.AUTH_COOKIE));
+            jws = jwtManager.verify(WebUtils2.getCookie(req, WebUtils2.AUTH_COOKIE));
 
         }catch(Exception e){
             String returnUrl = req.getServletPath();
@@ -66,8 +66,8 @@ public class JwtAuthorizationFilter extends AuthorizationFilter {
 
         String renewJwt = (String) jws.getBody().get("renew_jtw");
         if(renewJwt != null){
-            WebUtils.addCookie(
-                    resp, WebUtils.AUTH_COOKIE, renewJwt, "/", jwtManager.getJwtExpSecs()
+            WebUtils2.addCookie(
+                    resp, WebUtils2.AUTH_COOKIE, renewJwt, "/", jwtManager.getJwtExpSecs()
             );
         }
 
@@ -96,10 +96,10 @@ public class JwtAuthorizationFilter extends AuthorizationFilter {
 
     public boolean response(HttpServletRequest req, HttpServletResponse resp,
                             String rc, String msg, String redirectUtl) throws IOException {
-        if(WebUtils.isAjax(req)){
-            WebUtils.respJson(resp, new Result<>(rc, msg, redirectUtl));
+        if(WebUtils2.isAjax(req)){
+            WebUtils2.respJson(resp, new Result<>(rc, msg, redirectUtl));
         }else{
-            String url = WebUtils.getContextPath(req)+ redirectUtl;
+            String url = WebUtils2.getContextPath(req)+ redirectUtl;
             if(redirectUtl.equals(successUrl) || !rc.equals("200")){
                 url = buildUrlPaht(url, "UTF-8", ImmutableMap.of("msg", msg));
             }

@@ -1,0 +1,8 @@
+shiro.loginUrl=http://sit.cas.cjun.com:8080/cas/login?service=http://localhost:8080/user/home
+shiro.logoutUrl=http://sit.cas.cjun.com:8080/cas/logout?service=http://localhost:8080/user/home
+
+shiro.cas.serverUrlPrefix=http://sit.cas.cjun.com:8080/cas
+
+shiro.cas.service=http://localhost:8080/user/home
+shiro.successUrl=http://localhost:8081/front/index
+shiro.successUrl=http://localhost:8081/front/index
